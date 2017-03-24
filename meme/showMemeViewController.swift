@@ -9,27 +9,43 @@
 import UIKit
 
 class showMemeViewController: UIViewController {
+    
+    
+    
+    var mem : Meme?
+    var pos : Int?
+    
+    
+    @IBOutlet weak var memedImage : UIImageView!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        memedImage.image = mem?.memedImage
+        
+        self.tabBarController?.tabBar.isHidden = true
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "edit"
+        {
+            let vc = segue.destination as! ViewController
+            vc.position = pos
+            vc.originalImage = mem?.originalImage;
+            vc.editPic = true
+            
+        }
+        
     }
-    */
+    
+    
+
+  
 
 }
